@@ -26,11 +26,13 @@ for (const name of sheets) {
     // so stop items shrinking and require each box's content to end inside its own padding.
     const boxes = getComputedStyle(sheet).display === 'grid' ? [...sheet.children] : [sheet];
     const squeezed = [];
+    const spare = [];
     for (const box of boxes) {
       [...box.children].forEach((c) => (c.style.flexShrink = '0'));
       const last = box.lastElementChild.getBoundingClientRect().bottom;
       const limit = box.getBoundingClientRect().bottom - parseFloat(getComputedStyle(box).paddingBottom) - parseFloat(getComputedStyle(box).borderBottomWidth);
-      if (last > limit + 0.5) squeezed.push(Math.ceil(last - limit));
+      if (last > limit + 0.5) squeezed.push(Math.ceil(last - limit)); spare.push(Math.round((limit - last) * 10) / 10);
+      else spare.push(Math.round((limit - last) * 10) / 10);
     }
     const fonts = ['Inter', 'Space Grotesk'].filter((f) => !document.fonts.check(`700 16px "${f}"`));
     const small = new Set();
@@ -44,6 +46,7 @@ for (const name of sheets) {
     return {
       clipped,
       squeezed,
+      spare,
       overflowY: sheet.scrollHeight - sheet.clientHeight,
       overflowX: sheet.scrollWidth - sheet.clientWidth,
       docHeight: document.documentElement.scrollHeight,
@@ -54,6 +57,7 @@ for (const name of sheets) {
 
   if (report.overflowY > 0 || report.overflowX > 0 || report.docHeight > 1056)
     problems.push(`${name}: overflow (y ${report.overflowY}px, x ${report.overflowX}px, doc ${report.docHeight}px)`);
+  console.log(`${name}: spare above bottom padding ${report.spare.join(', ')}px`);
   report.squeezed.forEach((px) => problems.push(`${name}: content runs ${px}px past its bottom padding`));
   report.clipped.forEach((c) => problems.push(`${name}: content overflows its box by ${c}`));
   if (report.fonts.length) problems.push(`${name}: fonts not loaded: ${report.fonts.join(', ')}`);
