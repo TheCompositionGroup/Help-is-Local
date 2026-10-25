@@ -2,11 +2,25 @@
 
 ## Rev C — 25 Oct 2026
 
-- All sheets: removed "The Composition Group" from the printed branding; mark is now "Fancy Ape®" (was ™).
-- 001, 002: header right side now reads "Community Printable · Ready When Needed" (was "Community Series 001/002"). Footer sheet codes (TCG-CDP-CR-00X) removed; footer line is "REV C · 25 OCT 2026 · US LETTER · FREE TO COPY".
-- 003: same branding applied (Fancy Ape®, no company reference).
-- No safety wording or numbers changed. PDF filenames unchanged. LICENSE and README credit unchanged.
-- Site footer updated to Rev C.
+Branding (all sheets)
+- Removed "The Composition Group" and the TCG-CDP-CR sheet codes. Mark is now "Fancy Ape®" (was ™). Headers on 001 and 002 read "Community Printable · Ready When Needed". Footer line: "REV C · 25 OCT 2026 · US LETTER · FREE TO COPY".
+
+001 The First 72
+- Reorganized around actions. Stock list is now 4 lines (water, food + can opener, light/radio/batteries, meds/first aid/cash/documents) with "+ pet, baby, care needs" in the heading. The meds line no longer prints "7+ days (a month if you can)" (removed for space).
+- Added: "Power went out at", food rule (fridge ~4 hrs, full freezer ~48, half-full ~24), sewer line, LEAVE IF triggers with "We go to", generator line (outdoors only, 20+ ft, working CO alarm), phone battery line, "NOAA / local radio", and "Needs power for a device: backup plan".
+- Removed: the line under the title, "Flashlight and radio where you can find them", "Write down official instructions", and "Kit stored at" and "Go to" write-ins.
+
+002 Water First
+- Added: "germs, not chemicals … local advisories come first" in step 1, a BOIL WATER / DO NOT DRINK / DO NOT USE box, "Replace stored bleach yearly", and tight-lid food-grade containers.
+- Reorganized the unsafe-water steps (check advisory, bottled water, then boil or bleach, filter only if labeled). Removed the intro line, the People × Days = Gallons blanks, the Example line and the "Stored at / Filled on" blanks. Numerals 92px to 72px.
+
+003 Carry Cards
+- Added "Germs only · clear water · 5–9% bleach". Replaced "Medical needs · meds" with "Backup meeting place" and "Local radio" (no private medical information on cards). Card padding reduced.
+
+Build and site
+- Bottom padding 40px to 32px on all sheets. The build now fails if any sheet or card runs past its bottom padding, and reports spare space (001: 21.1px, 002: 24.4px, 003: 10.3px per card).
+- SOURCES.md: new sources and mappings. Food times verified 2026-10-25 (USDA/FoodSafety.gov). Sewer, advisory definitions and LEAVE IF stay pending manual verification.
+- Site footer updated to Rev C. PDF filenames unchanged. LICENSE and README credit unchanged.
 
 ## Rev B — 25 Oct 2026
 
