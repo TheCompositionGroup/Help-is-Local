@@ -1,5 +1,13 @@
 # Changelog
 
+## Rev C — 25 Oct 2026
+
+- All sheets: removed "The Composition Group" from the printed branding; mark is now "Fancy Ape®" (was ™).
+- 001, 002: header right side now reads "Community Printable · Ready When Needed" (was "Community Series 001/002"). Footer sheet codes (TCG-CDP-CR-00X) removed; footer line is "REV C · 25 OCT 2026 · US LETTER · FREE TO COPY".
+- 003: same branding applied (Fancy Ape®, no company reference).
+- No safety wording or numbers changed. PDF filenames unchanged. LICENSE and README credit unchanged.
+- Site footer updated to Rev C.
+
 ## Rev B — 25 Oct 2026
 
 First public draft.
