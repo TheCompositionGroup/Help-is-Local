@@ -1,8 +1,9 @@
 // Renders /source/*.html to /print/*.pdf (US Letter, zero margins, backgrounds on),
-// then merges them into help-is-local-print-set.pdf. Fails loudly on any problem.
+// merges them into help-is-local-print-set.pdf,
+// and copies all four PDFs into /docs for the Pages site. Fails loudly on any problem.
 import { chromium } from 'playwright';
 import { PDFDocument } from 'pdf-lib';
-import { readFile, writeFile, mkdir } from 'node:fs/promises';
+import { readFile, writeFile, mkdir, copyFile } from 'node:fs/promises';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import path from 'node:path';
 
@@ -62,4 +63,7 @@ for (const name of sheets) {
   (await set.copyPages(src, [0])).forEach((p) => set.addPage(p));
 }
 await writeFile(path.join(root, 'print', 'help-is-local-print-set.pdf'), await set.save());
+await mkdir(path.join(root, 'docs'), { recursive: true });
+for (const f of [...sheets, 'help-is-local-print-set'])
+  await copyFile(path.join(root, 'print', `${f}.pdf`), path.join(root, 'docs', `${f}.pdf`));
 console.log(`OK: ${sheets.length} sheets, 1 page each; print set has ${set.getPageCount()} pages.`);
