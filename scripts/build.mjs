@@ -32,7 +32,12 @@ for (const name of sheets) {
       const last = box.lastElementChild.getBoundingClientRect().bottom;
       const limit = box.getBoundingClientRect().bottom - parseFloat(getComputedStyle(box).paddingBottom) - parseFloat(getComputedStyle(box).borderBottomWidth);
       if (last > limit + 0.5) squeezed.push(Math.ceil(last - limit));
-      spare.push(Math.round((limit - last) * 10) / 10);
+      // space-between pins the last item to the limit, so spare room is the sum of the gaps between items
+      const kids = [...box.children].map((c) => c.getBoundingClientRect());
+      const rowGap = parseFloat(getComputedStyle(box).rowGap) || 0;
+      let gaps = 0;
+      for (let i = 1; i < kids.length; i++) gaps += kids[i].top - kids[i - 1].bottom - rowGap;
+      spare.push(Math.round((last > limit + 0.5 ? limit - last : gaps) * 10) / 10);
     }
     const fonts = ['Inter', 'Space Grotesk'].filter((f) => !document.fonts.check(`700 16px "${f}"`));
     const small = new Set();
