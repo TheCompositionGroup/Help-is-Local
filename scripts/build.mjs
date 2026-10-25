@@ -30,7 +30,9 @@ for (const name of sheets) {
       const px = parseFloat(getComputedStyle(n.parentElement).fontSize);
       if (px < minPx) small.add(`${px}px "${n.textContent.trim().slice(0, 40)}"`);
     }
+    const clipped = [...sheet.querySelectorAll('div')].filter((e) => !e.querySelector('h1') && e.scrollHeight > e.clientHeight + 1).map((e) => `${e.scrollHeight - e.clientHeight}px in "${e.textContent.trim().replace(/\s+/g, ' ').slice(0, 30)}"`);
     return {
+      clipped,
       overflowY: sheet.scrollHeight - sheet.clientHeight,
       overflowX: sheet.scrollWidth - sheet.clientWidth,
       docHeight: document.documentElement.scrollHeight,
@@ -41,6 +43,7 @@ for (const name of sheets) {
 
   if (report.overflowY > 0 || report.overflowX > 0 || report.docHeight > 1056)
     problems.push(`${name}: overflow (y ${report.overflowY}px, x ${report.overflowX}px, doc ${report.docHeight}px)`);
+  report.clipped.forEach((c) => problems.push(`${name}: content overflows its box by ${c}`));
   if (report.fonts.length) problems.push(`${name}: fonts not loaded: ${report.fonts.join(', ')}`);
   report.small.forEach((s) => problems.push(`${name}: text under ${MIN_PX}px: ${s}`));
 
