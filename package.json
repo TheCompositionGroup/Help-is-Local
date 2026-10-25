@@ -1,0 +1,14 @@
+{
+  "name": "help-is-local",
+  "version": "1.0.0",
+  "description": "Help Is Local — Ready When Needed. Free printable sheets, Community Series 001–002.",
+  "private": true,
+  "license": "CC-BY-4.0",
+  "scripts": {
+    "build": "node scripts/build.mjs"
+  },
+  "devDependencies": {
+    "pdf-lib": "1.17.1",
+    "playwright": "1.63.0"
+  }
+}
