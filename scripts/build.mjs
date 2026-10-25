@@ -22,6 +22,16 @@ for (const name of sheets) {
 
   const report = await page.evaluate((minPx) => {
     const sheet = document.body.querySelector('div');
+    // Flex shrinking can squeeze content into the padding without any overflow showing,
+    // so stop items shrinking and require each box's content to end inside its own padding.
+    const boxes = getComputedStyle(sheet).display === 'grid' ? [...sheet.children] : [sheet];
+    const squeezed = [];
+    for (const box of boxes) {
+      [...box.children].forEach((c) => (c.style.flexShrink = '0'));
+      const last = box.lastElementChild.getBoundingClientRect().bottom;
+      const limit = box.getBoundingClientRect().bottom - parseFloat(getComputedStyle(box).paddingBottom) - parseFloat(getComputedStyle(box).borderBottomWidth);
+      if (last > limit + 0.5) squeezed.push(Math.ceil(last - limit));
+    }
     const fonts = ['Inter', 'Space Grotesk'].filter((f) => !document.fonts.check(`700 16px "${f}"`));
     const small = new Set();
     const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
@@ -33,6 +43,7 @@ for (const name of sheets) {
     const clipped = [...sheet.querySelectorAll('div')].filter((e) => !e.querySelector('h1') && e.scrollHeight > e.clientHeight + 1).map((e) => `${e.scrollHeight - e.clientHeight}px in "${e.textContent.trim().replace(/\s+/g, ' ').slice(0, 30)}"`);
     return {
       clipped,
+      squeezed,
       overflowY: sheet.scrollHeight - sheet.clientHeight,
       overflowX: sheet.scrollWidth - sheet.clientWidth,
       docHeight: document.documentElement.scrollHeight,
@@ -43,6 +54,7 @@ for (const name of sheets) {
 
   if (report.overflowY > 0 || report.overflowX > 0 || report.docHeight > 1056)
     problems.push(`${name}: overflow (y ${report.overflowY}px, x ${report.overflowX}px, doc ${report.docHeight}px)`);
+  report.squeezed.forEach((px) => problems.push(`${name}: content runs ${px}px past its bottom padding`));
   report.clipped.forEach((c) => problems.push(`${name}: content overflows its box by ${c}`));
   if (report.fonts.length) problems.push(`${name}: fonts not loaded: ${report.fonts.join(', ')}`);
   report.small.forEach((s) => problems.push(`${name}: text under ${MIN_PX}px: ${s}`));
