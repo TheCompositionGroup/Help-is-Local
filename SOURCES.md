@@ -56,14 +56,19 @@ URLs found 2026-10-25. Agencies rename and move pages, so re-check each link at 
 
 Repeats 001 and 002 content (1 · 8 · 30, 911, gas, generator, text). Same sources as above.
 
+## Verified
+
+Verified 2026-10-25 by the maintainer, against the live source pages:
+
+- **VERIFIED 2026-10-25**: CDC, *Make Water Safe During an Emergency* sheet: 1-minute rolling boil; 3 minutes above 6,500 ft; 8 drops of bleach per gallon for clear water, 16 for cloudy; 30-minute wait.
+- **VERIFIED 2026-10-25**: "If you ever smell natural gas, Get Out!" (Ready.gov, Power Outages).
+
 ## Pending manual verification by maintainer
 
-The agency sites could not be opened directly in the build session. URLs and wording come from search results and summaries only. Each item below is **pending manual verification by maintainer**:
+The agency sites could not be opened directly in the build session. URLs and wording come from search results and summaries only. Everything not listed under Verified above is **pending manual verification by maintainer**, including:
 
-- Exact quote "If you ever smell natural gas, Get Out!" (Ready.gov, Power Outages).
 - Exact quote "Get out, stay out, call 911" (USFA, Home Fire Escape Plans).
 - Ready.gov, Floods: the URL and that it supports the "rising water → get out" line.
 - FCC, Tips for Communicating in an Emergency: that the current page still advises texting when calls fail.
 - Red Cross medication figures (7-day and 1-month) against the current survival-kit page and checklists.
-- Every URL above, and the CDC titles and figures (8 drops, 30 minutes, 6,500 ft, 6 months), against the live pages.
-- The footer on sheet 001 still says "American Red Cross, 7-day medication supply"; reword at the next revision to match the 7+ days / 1 month line.
+- Every URL above, and the remaining CDC figures (bleach strength 5–9%, 6-month replacement, 1 gallon per person per day).
